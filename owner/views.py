@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ schema_view = get_swagger_view(title='PayApp API')
 
 # ViewSets define the view behavior.
 class InvoiceViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Invoices.objects.all()
     serializer_class = InvoiceSerializer
 
