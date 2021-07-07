@@ -4,6 +4,8 @@ from payapp.settings import INVOICE_SECRET, BASE_URL
 from .models import Invoices
 
 # Serializers define the API representation.
+
+
 class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
     created_by = serializers.HiddenField(
         default=serializers.CurrentUserDefault())
@@ -11,7 +13,9 @@ class InvoiceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Invoices
         fields = ['id', 'client_name', 'client_email', 'project_name',
-                  'amount', 'created_at', 'created_by']
+                  'amount', 'created_at', 'link', 'status', 'created_by']
+        # No need to input from the frontend
+        read_only_fields = ['link', 'status']
 
     def save(self, **kwargs):
         """
