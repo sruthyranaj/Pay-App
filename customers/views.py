@@ -35,7 +35,7 @@ class ProcessInvoiceView(viewsets.ModelViewSet):
             # get the invoice id from the decrypted message and process the
             # invoice
             invoice_id =  str(decrypted.decode('utf-8'))
-            instance = Invoices.objects.filter(pk=invoice_id).all()
+            instance = Invoices.objects.filter(pk=invoice_id, status=True).all()
             return instance
         except:
             raise Exception("unable to find the linked invoice")
