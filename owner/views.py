@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework import viewsets

@@ -23,7 +23,7 @@ class ProcessInvoiceView(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Invoices.objects.all()
     serializer_class = InvoiceSerializer
-    
+
     def get_queryset(request, format=None):
         try:
             invoice_data = request.request.parser_context.get("kwargs")
@@ -34,9 +34,9 @@ class ProcessInvoiceView(viewsets.ModelViewSet):
             decrypted = fkey.decrypt(str(invoice_ref).encode('utf-8'))
             # get the invoice id from the decrypted message and process the
             # invoice
-            invoice_id =  str(decrypted.decode('utf-8'))
-            instance = Invoices.objects.filter(pk=invoice_id, status=True).all()
+            invoice_id = str(decrypted.decode('utf-8'))
+            instance = Invoices.objects.filter(
+                pk=invoice_id, status=True).all()
             return instance
         except:
             raise Exception("unable to find the linked invoice")
-   

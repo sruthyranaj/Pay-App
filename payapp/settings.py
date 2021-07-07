@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import environ
 from pathlib import Path
 import os
 
@@ -21,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-import environ
 env = environ.Env()
 # reading .env file
 environ.Env.read_env()
@@ -52,9 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework_swagger',
     # Local
-    'owner.apps.OwnerConfig', # new
-    'customers.apps.CustomersConfig', # new
-    'payments.apps.PaymentsConfig', # new
+    'owner.apps.OwnerConfig',  # new
+    'customers.apps.CustomersConfig',  # new
+    'payments.apps.PaymentsConfig',  # new
 ]
 
 MIDDLEWARE = [
@@ -85,8 +85,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries' : {
-                'staticfiles': 'django.templatetags.static', 
+            'libraries': {
+                'staticfiles': 'django.templatetags.static',
             }
         },
     },
@@ -123,7 +123,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -161,4 +162,3 @@ STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
