@@ -128,7 +128,7 @@ REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoS
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'api_key': {
-            'type': 'apiKey',
+            'type': 'basic',
             'in': 'header',
             'name': 'Authorization'
         }
