@@ -30,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 INVOICE_SECRET = env('INVOICE_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+BASE_URL = env("BASE_URL")
 ALLOWED_HOSTS = []
 
 

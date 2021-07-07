@@ -5,6 +5,7 @@ from owner.views import schema_view
 from django.conf.urls import url
 from django.contrib import admin
 from owner.views import InvoiceViewSet
+from customers.views import ProcessInvoiceView
 # Serializers define the API representation.
 
 
@@ -12,6 +13,7 @@ from owner.views import InvoiceViewSet
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register("invoices", InvoiceViewSet)
+router.register("customers/(?P<invoice_ref>[\w*.@+-]+)", ProcessInvoiceView)
 
 urlpatterns = [
     url('^$', schema_view),
