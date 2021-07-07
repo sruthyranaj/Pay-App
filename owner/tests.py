@@ -15,4 +15,5 @@ class YourTestClass(TestCase):
 
     def test_get_invoice(self):
         response = client.get('/invoices/')
-        print(response)
+        # Get forbidden error as token missing
+        assert response.status_code == 403
