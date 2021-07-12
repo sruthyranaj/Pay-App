@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     # Local
     'owner.apps.OwnerConfig',  # new
     'customers.apps.CustomersConfig',  # new
-    'payments.apps.PaymentsConfig',  # new
     'corsheaders',
 ]
 

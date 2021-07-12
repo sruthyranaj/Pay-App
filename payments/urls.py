@@ -1,1 +1,0 @@
-# urls for split payment
