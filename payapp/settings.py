@@ -27,12 +27,21 @@ env = environ.Env()
 environ.Env.read_env()
 # False if not in os.environ
 SECRET_KEY = env('SECRET_KEY')
-INVOICE_SECRET = env('INVOICE_SECRET')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-BASE_URL = env("BASE_URL")
+APP_BASE_URL = env("APP_BASE_URL")
+
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication', 
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
 
 # Application definition
 
@@ -55,9 +64,11 @@ INSTALLED_APPS = [
     'owner.apps.OwnerConfig',  # new
     'customers.apps.CustomersConfig',  # new
     'payments.apps.PaymentsConfig',  # new
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,7 +77,33 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+ALLOWED_HOSTS=['localhost', '127.0.0.1']
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:4200"
+]
+
+CORS_ORIGIN_WHITELIST = (
+  'http://127.0.0.1',
+)
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'Access-Control-Allow-Origin',
+    'dnt',
+    'origin',
+    'user-agent',
+    'X-XSRF-TOKEN',
+    'XSRF-TOKEN',
+    'csrfmiddlewaretoken',
+    'csrftoken',
+    'X-CSRF',
+    'x-csrftoken'
+]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
@@ -122,9 +159,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {

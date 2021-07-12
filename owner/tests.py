@@ -4,6 +4,8 @@ from rest_framework.test import APIClient
 client = APIClient()
 
 # Create your tests here.
+
+
 class YourTestClass(TestCase):
     def setUp(self):
         # Setup run before every test method.

@@ -5,14 +5,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializer import InvoiceSerializer
 from .models import Invoices
-
 schema_view = get_swagger_view(title='PayApp API')
 
 
 # ViewSets define the view behavior.
 class InvoiceViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = Invoices.objects.all()
+    queryset = Invoices.objects.all().order_by("-created_at")
     serializer_class = InvoiceSerializer
 
     def post(self, request, format=None):
